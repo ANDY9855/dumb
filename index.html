@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0c;
+    color: #eae6e1;
+    font-family: 'Jost', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .bg-glow {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(90, 60, 100, 0.12), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(60, 80, 70, 0.1), transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .petal {
+    position: fixed;
+    top: -10%;
+    pointer-events: none;
+    opacity: 0.55;
+    z-index: 1;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.55; }
+    90% { opacity: 0.45; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 90px 28px 120px;
+  }
+
+  .eyebrow {
+    text-align: center;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #9a8aa8;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.2s;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    text-align: center;
+    font-size: clamp(38px, 8vw, 64px);
+    line-height: 1.1;
+    background: linear-gradient(135deg, #f3e7d9, #c9a8d4 50%, #8fae9a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.4s;
+  }
+
+  .sub {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: #b9aec0;
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.6s;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #7a6a8a, transparent);
+    margin: 0 auto 60px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.8s;
+  }
+
+  .card {
+    background: linear-gradient(160deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 40px 36px;
+    margin-bottom: 36px;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    animation: fadeUp 1s ease forwards;
+  }
+
+  .card:nth-of-type(1) { animation-delay: 1.0s; }
+  .card:nth-of-type(2) { animation-delay: 1.2s; }
+  .card:nth-of-type(3) { animation-delay: 1.4s; }
+
+  .card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    line-height: 1.8;
+    color: #e6ddea;
+  }
+
+  .card p + p { margin-top: 18px; }
+
+  .signoff {
+    text-align: center;
+    margin-top: 70px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.7s;
+  }
+
+  .signoff .flower {
+    font-size: 30px;
+    margin-bottom: 14px;
+    filter: grayscale(0.2);
+  }
+
+  .signoff .line {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #c9bcd0;
+    margin-bottom: 6px;
+  }
+
+  .signoff .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 26px;
+    background: linear-gradient(135deg, #f3e7d9, #c9a8d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.9s;
+  }
+
+  .btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #0a0a0c;
+    background: linear-gradient(135deg, #e8d9ee, #cfe0d4);
+    border: none;
+    padding: 15px 38px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 24px rgba(180, 150, 200, 0.15);
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(180, 150, 200, 0.25);
+  }
+
+  .btn:active { transform: translateY(0); }
+
+  .reveal {
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: #a8d4b8;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.8s ease, opacity 0.8s ease, margin-top 0.8s ease;
+  }
+
+  .reveal.show {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 30px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 30px 24px; }
+    .card p { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div id="petals"></div>
+
+<div class="wrap">
+  <div class="eyebrow">a small letter for you</div>
+  <h1>I'm Sorry</h1>
+  <div class="sub">for Manahil, from Andy</div>
+  <div class="divider"></div>
+
+  <div class="card">
+    <p>I did something impulsive last night that I shouldn't have — I unfriended you, and that wasn't fair to you.</p>
+    <p>You didn't deserve that. It wasn't about you not caring, I just reacted badly in a moment I shouldn't have.</p>
+  </div>
+
+  <div class="card">
+    <p>You checking on me meant something, even if things got mistimed. I let a bad moment turn into something that hurt you, and I'm genuinely sorry for that.</p>
+    <p>You're someone I actually want in my corner — not someone I want to push away over one rough night.</p>
+  </div>
+
+  <div class="card">
+    <p>So — I'm sorry, properly. No excuses, just an apology. I hope you'll let me make it right.</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn" onclick="document.getElementById('reveal').classList.add('show')">open this</button>
+  </div>
+
+  <div class="reveal" id="reveal">
+    I really am sorry, Manahil. 🤍
+  </div>
+
+  <div class="signoff">
+    <div class="flower">🪷 🤍</div>
+    <div class="line">with regret and respect,</div>
+    <div class="name">Andy</div>
+  </div>
+</div>
+
+<script>
+  const petalEmojis = ['🤍', '🪷'];
+  const container = document.getElementById('petals');
+  const count = 16;
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.fontSize = (12 + Math.random() * 14) + 'px';
+    p.style.animationDuration = (10 + Math.random() * 10) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    container.appendChild(p);
+  }
+</script>
+
+</body>
+</html>
